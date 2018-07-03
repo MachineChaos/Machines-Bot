@@ -1,2 +1,2 @@
-# Machines-Bot
+# Machines Bot
 I made this :)

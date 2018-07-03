@@ -5,7 +5,7 @@ namespace MachinesBot.Storage.Implementations
 {
     public class InMemoryStorage : IDataStorage
     {
-        private readonly Dictionary<string, object> _dictionary = new Dictionary<string, object>
+        private readonly Dictionary<string, object> _dictionary = new Dictionary<string, object>();
 
         public void StoreObject(object obj, string key)
         {
@@ -20,4 +20,5 @@ namespace MachinesBot.Storage.Implementations
             return (T)_dictionary[key];
         }
     }
+    1
 }
