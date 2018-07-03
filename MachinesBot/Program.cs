@@ -4,8 +4,10 @@ namespace MachinesBot
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
+            Unity.RegisterTypes();
+
             Console.WriteLine("Hello, World!");
         }
     }
