@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MachinesBot.Discord;
+using MachinesBot.Discord.Entities;
+using System;
 
 namespace MachinesBot
 {
@@ -7,8 +9,13 @@ namespace MachinesBot
         static void Main()
         {
             Unity.RegisterTypes();
-
             Console.WriteLine("Hello, World!");
+
+            var discordBotConfig = new BotConfig
+            {
+                Token = "ABC",
+                SocketConfig = SocketConfig.GetDefault()
+            };
         }
     }
 }
