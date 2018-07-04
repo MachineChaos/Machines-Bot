@@ -4,9 +4,9 @@ using System;
 
 namespace MachinesBot
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             Unity.RegisterTypes();
             Console.WriteLine("Hello, World!");
@@ -16,6 +16,10 @@ namespace MachinesBot
                 Token = "ABC",
                 SocketConfig = SocketConfig.GetDefault()
             };
+
+            var connection = Unity.Resolve<Connection>();
+
+            Console.ReadKey();
         }
     }
 }

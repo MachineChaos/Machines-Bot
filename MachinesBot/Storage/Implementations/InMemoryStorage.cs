@@ -20,5 +20,4 @@ namespace MachinesBot.Storage.Implementations
             return (T)_dictionary[key];
         }
     }
-    1
 }
