@@ -19,19 +19,30 @@ test_script:
     # Get Coveralls Net and extract it to /tools/
     - ps: dotnet tool install coveralls.net --version 1.0.0 --tool-path tools
 
-    # Run OpenCover Console
+    # Run xUnit with OpenCover Console
     - ps: >
-            .\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"C:\Program Files\dotnet\dotnet.exe"
+            .\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe 
+            -register:user
+            -target:"C:\Program Files\dotnet\dotnet.exe"
             "-targetargs:"".\packages\xunit.runner.console.2.3.1\tools\netcoreapp2.0\xunit.console.dll""
-            ""MachinesBot.xUnit.Tests\bin\Release\netcoreapp2.0\MachinesBot.xUnit.Tests.dll"" -noshadow -appveyor"
-            -filter:"+[MachinesBot*]* -[MachinesBot*]*Tests.*" -oldStyle -output:opencoverCoverage.xml
-    # run Coveralls
+            ""MachinesBot.xUnit.Tests\bin\Release\netcoreapp2.1\MachinesBot.xUnit.Tests.dll""
+            -noshadow
+            -appveyor"
+            -filter:"+[MachinesBot*]* -[MachinesBot*]*Tests.*"
+            -oldStyle
+            -output:opencoverCoverage.xml
+
+    # Run Coveralls
     - ps: >
             $coveralls = "& .\tools\csmacnz.coveralls.exe
-            --opencover -i opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN
-            --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH
-            --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL
-            --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID"
+            --opencover -i opencoverCoverage.xml
+            --repoToken $env:COVERALLS_REPO_TOKEN
+            --commitId $env:APPVEYOR_REPO_COMMIT
+            --commitBranch $env:APPVEYOR_REPO_BRANCH
+            --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR
+            --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL
+            --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE
+            --jobId $env:APPVEYOR_JOB_ID"
             
             Invoke-Expression $coveralls
             
