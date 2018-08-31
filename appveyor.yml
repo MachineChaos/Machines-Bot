@@ -25,12 +25,13 @@ test_script:
             "-targetargs:"".\packages\xunit.runner.console.2.3.1\tools\netcoreapp2.0\xunit.console.dll""
             ""MachinesBot.xUnit.Tests\bin\Release\netcoreapp2.0\MachinesBot.xUnit.Tests.dll"" -noshadow -appveyor"
             -filter:"+[MachinesBot*]* -[MachinesBot*]*Tests.*" -oldStyle -output:opencoverCoverage.xml
-
     # run Coveralls
     - ps: >
-            $coveralls = ".\tools\csmacnz.coveralls.exe"
-            & $coveralls --opencover -i opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN
+            $coveralls = "& .\tools\csmacnz.coveralls.exe
+            --opencover -i opencoverCoverage.xml --repoToken $env:COVERALLS_REPO_TOKEN
             --commitId $env:APPVEYOR_REPO_COMMIT --commitBranch $env:APPVEYOR_REPO_BRANCH
             --commitAuthor $env:APPVEYOR_REPO_COMMIT_AUTHOR --commitEmail $env:APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL
-            --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID
-  
+            --commitMessage $env:APPVEYOR_REPO_COMMIT_MESSAGE --jobId $env:APPVEYOR_JOB_ID"
+            
+            Invoke-Expression $coveralls
+            
